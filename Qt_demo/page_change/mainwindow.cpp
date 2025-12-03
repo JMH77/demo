@@ -53,7 +53,7 @@ void MainWindow::setLoginPage(QWidget* page)
     //水平
     QHBoxLayout* hbox = new QHBoxLayout(page);
     //竖直
-    QVBoxLayout* vbox = new QVBoxLayout(page);
+    QVBoxLayout* vbox = new QVBoxLayout();
 
     //标签
     QLabel* usernameLabel = new QLabel(page);
@@ -137,19 +137,19 @@ void MainWindow::setLoginPage(QWidget* page)
 
 
     //用户名行
-    QHBoxLayout* usernameBox = new QHBoxLayout(page);
+    QHBoxLayout* usernameBox = new QHBoxLayout();
     usernameLabel->setText("用户名：");
     usernameBox->addWidget(usernameLabel);
     usernameBox->addWidget(usernameEdit);
 
     //密码行
-    QHBoxLayout* passwordBox = new QHBoxLayout(page);
+    QHBoxLayout* passwordBox = new QHBoxLayout();
     passwordLabel->setText("密码：");
     passwordBox->addWidget(passwordLabel);
     passwordBox->addWidget(passwordEdit);
 
     //按钮行
-    QHBoxLayout* buttonBox = new QHBoxLayout(page);
+    QHBoxLayout* buttonBox = new QHBoxLayout();
     buttonBox->addWidget(loginButton);
     buttonBox->addWidget(registButton);
 
