@@ -120,7 +120,6 @@ void MainWindow::setLoginPage(QWidget* page)
         border-radius: 6px; /* 圆角 */
         background-color: #1890FF; /* 统一颜色（你可以随便改） */
         color: white; /* 字体白色 */
-        cursor: pointer; /* 鼠标悬浮变手型 */
     }
     QPushButton:hover {
         background-color: #096DD9; /* hover 加深 */
@@ -133,6 +132,9 @@ void MainWindow::setLoginPage(QWidget* page)
     // 两个按钮直接用同一个 QSS，样式完全一致
     loginButton->setStyleSheet(btnQss);
     registButton->setStyleSheet(btnQss);
+    // 设置鼠标指针样式（Qt QSS不支持cursor属性，需要用C++代码设置）
+    loginButton->setCursor(Qt::PointingHandCursor);
+    registButton->setCursor(Qt::PointingHandCursor);
 
 
 
