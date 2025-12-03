@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     this->setFixedSize(600,400);
     InitStackedWidget();
+    connections();
 
 }
 
@@ -36,7 +37,7 @@ void MainWindow::InitStackedWidget()
 
     int loginIndex = m_stackedwidget->addWidget(pagelogin);
     int mainIndex = m_stackedwidget->addWidget(pagemain);
-    qDebug() << "ewfhuiaew" << loginIndex << "     " << mainIndex;
+    // qDebug() << "ewfhuiaew" << loginIndex << "     " << mainIndex;
 
 
     m_stackedwidget->setCurrentIndex(loginIndex);
@@ -64,7 +65,9 @@ void MainWindow::setLoginPage(QWidget* page)
 
     //按钮
     QPushButton* loginButton = new QPushButton(page);
+    loginButton->setObjectName("btnlogin");
     QPushButton* registButton = new QPushButton(page);
+    registButton->setObjectName("btnregist");
     loginButton->setText("登录");
     registButton->setText("注册");
 
@@ -166,6 +169,42 @@ void MainWindow::setLoginPage(QWidget* page)
     //给 hbox 添加「右侧弹簧」：和左侧弹簧配合，实现水平居中
     hbox->addSpacerItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
 }
+
+void MainWindow::loginButtoncliked()
+{
+    // qDebug() << "aiofhawuo";
+    //todos:
+    //这里应该是验证管理器的任务，验证后会返回是否成功
+    bool sucess = true;
+    if(sucess){
+        emit loginSucess();
+        // qDebug() << "awiufgyawbh";
+    }
+}
+
+void MainWindow::connections()
+{
+    //先连接点击事件和void MainWindow::loginButtoncliked()
+    connect(this->m_stackedwidget->widget(0)->findChild<QPushButton*>("btnlogin"),
+            &QPushButton::clicked,
+            this,
+            &MainWindow::loginButtoncliked
+            );
+
+    connect(this,
+            &MainWindow::loginSucess,
+            this,
+            [this](){
+                this->m_stackedwidget->setCurrentIndex(1);
+                qDebug() << "hesfuiaw  " << m_stackedwidget->currentIndex();
+            }
+            );
+}
+
+
+
+
+
 
 
 

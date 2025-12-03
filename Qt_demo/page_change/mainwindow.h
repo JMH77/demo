@@ -20,7 +20,12 @@ public:
     ~MainWindow();
     void InitStackedWidget();
     void setLoginPage(QWidget* page);
+    void loginButtoncliked();
+    void registerButtoncliked();
+    void connections();
 
+signals:
+    void loginSucess();
 
 
 private:
