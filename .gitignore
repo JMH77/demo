@@ -1,0 +1,128 @@
+# ------------------------------
+# Qt 编译核心产物（必忽略）
+# ------------------------------
+# 编译输出目录（Qt Creator 默认 build-xxx 或自定义 build 文件夹）
+build/
+build-*/
+Build/
+build_*/
+# Qt 生成的 Makefile 及依赖文件
+Makefile
+makefile
+Makefile.*
+makefile.*
+*.mk
+*.mak
+# 目标二进制文件（可执行程序、动态库、静态库）
+*.exe
+*.exe~
+*.dll
+*.so
+*.so.*
+*.dylib
+*.a
+*.lib
+*.o
+*.obj
+*.obj.d
+*.pch
+# Qt MOC 生成文件（元对象编译产物）
+moc_*.cpp
+moc_*.h
+# Qt UIC 生成文件（UI 编译产物）
+ui_*.h
+# Qt RCC 生成文件（资源文件编译产物）
+qrc_*.cpp
+# Qt LRELEASE 生成的翻译文件
+*.qm
+# 预编译头文件
+*.gch
+# Qt 调试符号文件
+*.pdb
+*.dSYM/
+# 临时编译中间文件
+*.ii
+*.s
+*.i
+*.lo
+*.la
+
+# ------------------------------
+# Qt Creator/IDE 配置文件（必忽略）
+# ------------------------------
+# Qt Creator 项目用户配置（包含个人编译路径、窗口布局等）
+*.user
+*.user.*
+*.su
+# Qt Creator 缓存文件
+*.pro.user.cmake
+*.pro.user.config
+*.pro.user.shared
+# Qt Creator 会话文件
+*.qws
+*.qws.user
+# CLion/Visual Studio 等其他 IDE 配置（如果混用 IDE）
+.idea/
+.vscode/*.su
+.vscode/ipch/
+.vscode/cmake-build-*/
+.vscode/compile_commands.json
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.suo
+
+# ------------------------------
+# 资源/翻译/文档相关（按需忽略）
+# ------------------------------
+# 未编译的翻译源文件（.ts 可提交，.qm 已在编译产物中忽略）
+# *.ts  # 如果需要共享翻译源文件，注释此行
+# 资源文件备份
+*.qrc.bak
+# 文档生成产物（如 Doxygen 输出）
+doc/
+docs/
+Doxygen/
+*.chm
+*.pdf.bak
+
+# ------------------------------
+# 系统/临时文件（通用忽略）
+# ------------------------------
+# Windows 系统文件
+Thumbs.db
+Thumbs.db:encryptable
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+# macOS 系统文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+# Linux 临时文件
+*~
+.#*
+# 日志文件
+*.log
+*.log.bak
+# 压缩包
+*.zip
+*.tar.gz
+*.tar.bz2
+*.7z
+
+# ------------------------------
+# 自定义忽略（根据项目补充）
+# ------------------------------
+# 例如：自定义的输出目录、第三方库目录等
+# bin/
+# lib/
+# third_party/
