@@ -7,14 +7,19 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    ,m_db(new databasemanager)
+    ,m_dbmanager(new databasemanager)
 {
     ui->setupUi(this);
-    m_db->initDatabase();
+    m_dbmanager->initDatabase();
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::initDB()
+{
+
 }

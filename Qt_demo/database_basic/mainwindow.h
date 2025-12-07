@@ -19,9 +19,10 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void initDB();
 
 private:
     Ui::MainWindow *ui;
-    databasemanager* m_db;
+    databasemanager* m_dbmanager;
 };
 #endif // MAINWINDOW_H
