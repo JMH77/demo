@@ -13,6 +13,8 @@ public:
     void initDatabase();
     void createTable();
     bool isConnected();
+    void disconnectDb();
+    void insertData(const QString &name, int age);
 
 private:
     QSqlDatabase* m_db;

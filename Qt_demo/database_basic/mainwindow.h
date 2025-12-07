@@ -21,6 +21,9 @@ public:
     ~MainWindow();
     void initDB();
 
+private slots:
+    void on_insertbtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     databasemanager* m_dbmanager;
