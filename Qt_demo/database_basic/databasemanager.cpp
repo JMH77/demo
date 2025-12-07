@@ -10,6 +10,7 @@ databasemanager::databasemanager() {
 void databasemanager::initDatabase()
 {
     QSqlDatabase m_db = QSqlDatabase::addDatabase("QMYSQL");
+    // QSqlDatabase m_db = QSqlDatabase::addDatabase("QODBC");
     m_db.setDatabaseName("test1207");
     m_db.setHostName("localhost");	//主机地址
     m_db.setUserName("uroot");			//进入数据库的用户名
