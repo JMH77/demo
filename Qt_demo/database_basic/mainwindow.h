@@ -1,7 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "databasemanager.h"
 #include <QMainWindow>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,5 +22,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    databasemanager* m_db;
 };
 #endif // MAINWINDOW_H
