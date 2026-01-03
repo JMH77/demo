@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML+CSS 核心概念全景 Demo</title>
+    
+    <style>
+        /* =========================================
+           1. CSS 变量与重置 (Global Reset)
+           React/Vue 项目中通常定义 styles/variables.css
+           ========================================= */
+        :root {
+            --primary-color: #6366f1;       /* 主题色 */
+            --text-main: #1f2937;           /* 主要文字颜色 */
+            --text-secondary: #6b7280;      /* 次要文字颜色 */
+            --bg-color: #f3f4f6;            /* 背景色 */
+            --card-bg: #ffffff;             /* 卡片背景 */
+            --radius: 12px;                 /* 圆角统一管理 */
+        }
+
+        /* 核心知识点：Box-Sizing
+           让 padding 和 border 包含在 width 宽度内，布局不乱 */
+        * {
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0;
+        }
+
+        /* =========================================
+           2. 页面布局 (Flex Layout)
+           使用 Flexbox 实现页面的垂直居中
+           ========================================= */
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            
+            /* Flex 布局神器：让内容水平垂直居中 */
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center;     /* 垂直居中 */
+            min-height: 100vh;       /* 视口高度占满，确保居中生效 */
+        }
+
+        /* =========================================
+           3. 组件样式 (The Card Component)
+           模拟 React/Vue 中的独立组件样式
+           ========================================= */
+        .card {
+            /* 核心知识点：相对定位
+               为了让内部的 .badge (绝对定位) 以这个卡片为参考系 */
+            position: relative; 
+            
+            width: 360px;
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            /* 阴影让卡片浮起来 */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* 防止图片溢出圆角 */
+        }
+
+        /* 图片区域 */
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover; /* 保证图片不变形，填满区域 */
+            display: block;    /* 消除图片底部的微小空隙 */
+        }
+
+        /* 核心知识点：绝对定位 (Position Absolute)
+           悬浮在右上角的标签 */
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            
+            background-color: #ef4444;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 10; /* 确保层级高于图片 */
+        }
+
+        /* 内容容器：利用 Padding 控制内部留白 */
+        .card-content {
+            padding: 24px;
+        }
+
+        /* 文本排版 */
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5; /* 增加行高提升可读性 */
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           4. 表单交互 (Forms & Interactions)
+           ========================================= */
+        .user-options {
+            display: flex; /* 让很多元素横排 */
+            gap: 10px;     /* 元素之间的间距 */
+        }
+
+        /* 核心知识点：Flex Grow */
+        .card-input {
+            flex: 1; /* 自动占满剩余空间 */
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            outline: none; /* 去掉默认聚焦黑框 */
+            transition: border-color 0.2s; /* 动画过渡 */
+        }
+
+        /* 伪类：聚焦状态 */
+        .card-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            
+            /* 变换动画 */
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        /* 伪类：悬停状态 */
+        .btn:hover {
+            background-color: #4f46e5;
+            transform: translateY(-2px); /* 鼠标放上去由轻微上浮效果 */
+        }
+
+        /* =========================================
+           5. 底部元数据 (Flex Justify)
+           ========================================= */
+        .card-footer {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #f3f4f6;
+            
+            display: flex;
+            justify-content: space-between; /* 两端对齐 */
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* 标签选择器组合 */
+        .tags span {
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+      HTML5 语义化标签 
+      main: 页面主体
+      article: 独立的内容块（这里代表一个卡片组件）
+    -->
+    <main>
+        <article class="card">
+            
+            <!-- 绝对定位的角标（子绝父相） -->
+            <div class="badge">HOT</div>
+
+            <!-- 图片展示 -->
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                 alt="前端开发代码展示" 
+                 class="card-image">
+
+            <div class="card-content">
+                <!-- 文本排版 -->
+                <h2 class="card-title">前端全栈课程</h2>
+                <p class="card-desc">
+                    掌握 HTML5、CSS3 核心布局与 React/Vue 框架实战。
+                    从零基础构建现代 Web 应用。
+                </p>
+
+                <!-- 表单区域 -->
+                <form class="user-options" onsubmit="return false;">
+                    <!-- Input 属性：type, placeholder, required -->
+                    <input type="email" 
+                           class="card-input" 
+                           placeholder="输入邮箱订阅" 
+                           required>
+                    <button type="submit" class="btn">订阅</button>
+                </form>
+
+                <!-- 底部信息 -->
+                <footer class="card-footer">
+                    <div class="tags">
+                        <span>#CSS</span>
+                        <span>#Vue</span>
+                    </div>
+                    <div>120 人正在学习</div>
+                </footer>
+            </div>
+        </article>
+    </main>
+
+</body>
+</html>
