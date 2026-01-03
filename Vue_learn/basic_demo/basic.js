@@ -177,3 +177,171 @@ const showName = userLoggedIn && "欢迎回来，用户！";
 // 如果 inputVal 为空/null，就用 "默认值"
 const inputVal = null;
 const finalVal = inputVal || "默认值";
+
+/* ==========================================================
+   第八部分：事件处理 (Event Handling) —— Vue @click 的底层
+   Vue 场景：methods 中定义的所有函数，本质就是事件回调
+   ========================================================== */
+
+// 模拟一个按钮点击事件
+const handleLogin = (event) => {
+    // event 是浏览器自动传进来的事件对象
+    console.log("按钮被点击了！", event.type); // 输出: click
+    
+    // 常见事件属性
+    console.log("点击位置:", event.clientX, event.clientY);
+    
+    // 阻止默认行为（比如表单提交刷新页面）
+    event.preventDefault();
+};
+
+// 模拟调用（真实场景是绑定到 DOM）
+console.log("【模拟】登录按钮被点击");
+handleLogin({ type: 'click', clientX: 150, clientY: 300, preventDefault: () => {} });
+
+// 带参数的事件函数（Vue 中 @click="addToCart(item.id)"）
+const addToCart = (productId, quantity = 1) => {
+    console.log(`添加商品 ${productId} 到购物车，数量: ${quantity}`);
+};
+addToCart(101, 3); // 添加商品 101 到购物车，数量: 3
+
+/* ==========================================================
+   第九部分：表单事件与双向绑定模拟
+   Vue 场景：v-model 的底层原理（input 事件 + value 更新）
+   ========================================================== */
+
+let formData = {
+    username: '',
+    password: '',
+    remember: false
+};
+
+// 模拟输入框变化
+const handleInputChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    
+    // 根据输入类型更新对应字段
+    if (type === 'checkbox') {
+        formData[name] = checked;
+    } else {
+        formData[name] = value;
+    }
+    
+    console.log("当前表单数据:", formData);
+};
+
+// 模拟用户输入
+handleInputChange({ target: { name: 'username', value: 'zhangshan' } });
+handleInputChange({ target: { name: 'password', value: '123456' } });
+handleInputChange({ target: { name: 'remember', type: 'checkbox', checked: true } });
+
+/* ==========================================================
+   第十部分：条件与循环（JS 原生写法）—— 对应 Vue 的 v-if / v-for
+   ========================================================== */
+
+const courses = [
+    { id: 1, name: "Vue3 入门", price: 0, isFree: true },
+    { id: 2, name: "React 进阶", price: 999, isFree: false },
+    { id: 3, name: "TypeScript", price: 0, isFree: true }
+];
+
+// 1. 条件判断 (if / 三元)
+courses.forEach(course => {
+    const displayPrice = course.isFree 
+        ? "免费" 
+        : `￥${course.price}`;
+    
+    console.log(`${course.name} - 价格: ${displayPrice}`);
+});
+
+// 2. 循环遍历 (forEach / for...of)
+// Vue 的 v-for 本质上就是这些
+console.log("=== 课程列表 ===");
+for (const course of courses) {
+    if (course.isFree) {
+        console.log(`🎁 免费课程: ${course.name}`);
+    }
+}
+
+/* ==========================================================
+   第十一部分：DOM 操作基础（理解 Vue 为什么能替代它）
+   虽然 Vue 不推荐直接操作 DOM，但理解它能让你知道 Vue 有多香
+   ========================================================== */
+
+// 假设页面上有这个元素（真实项目中你不会这么写，但要知道原理）
+const mockElement = {
+    textContent: '',
+    classList: {
+        add: (cls) => console.log(`添加类: ${cls}`),
+        remove: (cls) => console.log(`移除类: ${cls}`),
+        toggle: (cls) => console.log(`切换类: ${cls}`)
+    },
+    style: {}
+};
+
+// 修改文本
+mockElement.textContent = "登录成功！";
+console.log("DOM文本更新:", mockElement.textContent);
+
+// 操作类名（Vue 中用 :class 替代）
+mockElement.classList.add("success");
+mockElement.classList.toggle("active");
+
+// 修改样式（Vue 中用 :style 替代）
+mockElement.style.color = "green";
+mockElement.style.display = "block";
+
+/* ==========================================================
+   第十二部分：模块化（import / export）—— Vue 单文件组件的核心
+   Vue 项目里到处都是 import
+   ========================================================== */
+
+// 假设这是 utils.js 文件的内容
+// export const formatPrice = (price) => price === 0 ? '免费' : `￥${price}`;
+// export const API_BASE = 'https://api.example.com';
+
+// 假设这是当前文件（main.js）
+const formatPrice = (price) => price === 0 ? '免费' : `￥${price}`;
+const API_BASE = 'https://api.example.com';
+
+// 使用
+courses.forEach(course => {
+    console.log(`课程: ${course.name}, 价格: ${formatPrice(course.price)}`);
+});
+
+// 默认导出和导入（Vue 组件常用）
+const MyComponent = {
+    data() { return { msg: 'Hello Vue' }; },
+    methods: { sayHi() { console.log(this.msg); } }
+};
+
+// export default MyComponent;
+
+/* ==========================================================
+   最终总结：Vue 开发中你真正每天都在用的 JS 知识全家桶
+   ========================================================== */
+
+console.log(`
+🎯 学完这两份 Demo，你已经掌握了 Vue 所需的核心 JS：
+
+1. 变量声明：const / let
+2. 箭头函数 + 模板字符串
+3. 解构赋值（props、ref 必备）
+4. 展开运算符（状态更新必备）
+5. 数组方法：map / filter / reduce / find
+6. 异步：async / await + Promise
+7. 事件处理：@click、@input 等底层
+8. 条件与循环（v-if / v-for 的 JS 版）
+9. 模块化 import/export（项目结构基础）
+
+这些就是你在写 Vue 组件时，99% 时间都在打交道的 JS 语法。
+
+剩下的（比如 class、原型、this 绑定、闭包等）虽然有用，但不是每天必写，遇到再深入就行。
+
+现在你可以放心去学 Vue 了！当你看到：
+@click="handleClick"
+v-for="item in filteredList"
+const { count, increment } = store()
+
+你都会立刻明白它背后在干什么。
+`);
