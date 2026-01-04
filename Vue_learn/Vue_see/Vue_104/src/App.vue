@@ -9,8 +9,9 @@
     <Components1 />
 
     <!-- 多个子组件实例 -->
-    <arco_test />
-    <test_v_model />
+    <!-- <arco_test /> -->
+    <!-- <test_v_model /> -->
+    <TestButton />
 
     <!-- 事件监听：子组件可以通过 $emit 发射事件，这里先留着演示 -->
     <!-- <Components1 @some-event="handleEvent" /> -->
@@ -28,6 +29,7 @@ import { ref, onMounted } from 'vue'
 // 导入我们刚才创建的子组件
 import Components1 from './components/components1.vue'
 import test_v_model from './components/v_model_test.vue'
+import TestButton from './components/test_button.vue'
 import arco_test from './components/arco_test.vue'
 
 // ------------------- 父组件的响应式数据 -------------------
