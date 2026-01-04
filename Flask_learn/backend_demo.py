@@ -11,7 +11,7 @@ from datetime import datetime
 import pymysql
 
 # 必须在使用 pymysql 之前安装
-pymysql.install_as_MySQLdb()
+# pymysql.install_as_MySQLdb()
 
 app = Flask(__name__)
 
@@ -90,7 +90,8 @@ def test_get():
         "data": {
             "server": "Flask",
             "timestamp": datetime.now().isoformat(),
-            "method": "GET"
+            "method": "GET",
+            "name": "JMH嘿嘿"
         }
     })
 
